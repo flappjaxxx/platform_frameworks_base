@@ -294,8 +294,8 @@
     <string name="power_off">Power off</string>
 
     <!-- Button to reboot the phone, within the Phone Options dialog -->
-    <string name="reboot_system" product="tablet">Reboot Nexus</string>
-    <string name="reboot_system" product="default">Reboot Nexus</string>
+    <string name="reboot_system" product="tablet">Reboot</string>
+    <string name="reboot_system" product="default">Reboot</string>
     <!-- Reboot Progress Dialog. This is shown if the user chooses to reboot the phone. -->
     
     <!-- label for item that screenshots in phone options dialog -->
@@ -4024,7 +4024,6 @@
     <string name="user_switched">Current user <xliff:g id="name" example="Bob">%1$s</xliff:g>.</string>
     <!-- Default name of the owner user [CHAR LIMIT=20] -->
     <string name="owner_name" msgid="3879126011135546571">Owner</string>
-
     <!-- label for item that reboots the phone in phone options dialog -->
     <string name="global_action_reboot">Reboot</string>
 
