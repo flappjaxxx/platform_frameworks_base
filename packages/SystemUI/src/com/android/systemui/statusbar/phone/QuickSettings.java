@@ -334,7 +334,7 @@ class QuickSettings {
 		parent.addView(userTile);
 		mDynamicSpannedTiles.add(userTile);
 		
-		ArrayList<String> mGesturesOrderedList = getGesturesOrderedList();
+	/*	ArrayList<String> mGesturesOrderedList = getGesturesOrderedList();
         for (int i = 0; i < mGesturesOrderedList.size(); i++) {
 			loadTile(mGesturesOrderedList.get(i), parent, inflater);
 		}
@@ -376,7 +376,7 @@ class QuickSettings {
             }
         });
         parent.addView(userTile);
-        mDynamicSpannedTiles.add(userTile);
+        mDynamicSpannedTiles.add(userTile);  */
 
         // Brightness
         QuickSettingsTileView brightnessTile = (QuickSettingsTileView)
