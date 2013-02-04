@@ -169,6 +169,7 @@ public class NotificationPanelView extends PanelView {
                         }
                     }
                     break;
+=======
                     flip = true;
                     break;
                 case MotionEvent.ACTION_UP:
