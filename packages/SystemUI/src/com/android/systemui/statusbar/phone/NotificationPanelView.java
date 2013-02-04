@@ -168,6 +168,10 @@ public class NotificationPanelView extends PanelView {
                             mOkToFlip = false;
                         }
                     }
+                    break;
+                    flip = true;
+                    break;
+                case MotionEvent.ACTION_UP:
                     swipeFlipJustFinished = mSwipeTriggered;
                     mSwipeTriggered = false;
                     mTrackingSwipe = false;
