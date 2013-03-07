@@ -1008,9 +1008,9 @@
      -->
     <integer-array name="config_defaultNotificationVibePattern">
         <item>0</item>
+        <item>350</item>
         <item>250</item>
-        <item>250</item>
-        <item>250</item>
+        <item>350</item>
     </integer-array>
 
     <!-- Vibrator pattern to be used as the default for notifications
@@ -1019,9 +1019,9 @@
      -->
     <integer-array name="config_notificationFallbackVibePattern">
         <item>0</item>
-        <item>250</item>
-        <item>250</item>
-        <item>250</item>
+        <item>100</item>
+        <item>150</item>
+        <item>100</item>
     </integer-array>
     
 
@@ -1030,5 +1030,7 @@
     <!-- Timeout in MS for how long you have to long-press the back key to
          kill the foreground app. -->
     <integer name="config_backKillTimeout">2000</integer>
-    
+
+    <!-- Flag indicating if the speed up audio on mt call code should be executed -->
+    <bool name="config_speed_up_audio_on_mt_calls">false</bool>
 </resources>
