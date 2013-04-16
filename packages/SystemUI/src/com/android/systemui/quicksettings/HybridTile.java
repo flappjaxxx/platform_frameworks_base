@@ -14,11 +14,14 @@ import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.ColorUtils;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.TextView;
+
+import android.util.Log;
 
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.QuickSettingsController;
@@ -26,7 +29,11 @@ import com.android.systemui.statusbar.phone.QuickSettingsContainerView;
 
 public class HybridTile extends QuickSettingsTile {
 
+<<<<<<< HEAD
     private static final String PARANOID_PREFERENCES_PKG = "com.paranoid.preference";
+=======
+    private static final String PARANOID_PREFERENCES_PKG = "com.paranoid.preferences";
+>>>>>>> pa/hybrid2
     
     private String mDefaultLabel;
     private String mPackageName;
@@ -95,8 +102,16 @@ public class HybridTile extends QuickSettingsTile {
                     getAppInfoFromPackageName(mPackageName);
             mSourceDir = appInfo.sourceDir;
 
+<<<<<<< HEAD
             mStatus = HybridManager.getProperty(mPackageName).getDpi() + " DPI / " +
                     HybridManager.getProperty(mPackageName).getLayout() + "P";
+=======
+            int dpi = HybridManager.getProperty(mPackageName).getDpi();
+            int layout = HybridManager.getProperty(mPackageName).getLayout();
+            mStatus = (dpi==0 ? DisplayMetrics.getDeviceDensity() : dpi) + " DPI / " +
+                    (layout==0 ? 360 : layout) + "P";
+
+>>>>>>> pa/hybrid2
 
             mColors = HybridManager.getProperty(mPackageName).getColors();
 
@@ -118,7 +133,6 @@ public class HybridTile extends QuickSettingsTile {
         app.setText(mLabel);
 
         // Color changes
-
         View[] swatches = new View[5];
         swatches[0] = mTile.findViewById(R.id.hybrid_swatch1);
         swatches[1] = mTile.findViewById(R.id.hybrid_swatch2);
@@ -131,7 +145,11 @@ public class HybridTile extends QuickSettingsTile {
                 swatches[colorIndex].setBackgroundDrawable(mContext.getResources().getDrawable(
                         R.drawable.color_picker).mutate());                    
                 swatches[colorIndex].getBackground().setColorFilter(mColors[colorIndex]
+<<<<<<< HEAD
                         .toUpperCase().equals("NULL") ? HybridManager.COLOR_DEF_CODES[
+=======
+                        .equals("") ? HybridManager.COLOR_DEF_CODES[
+>>>>>>> pa/hybrid2
                 colorIndex] : ColorUtils.hexToInt(mColors[colorIndex]),
                         PorterDuff.Mode.SRC_ATOP);
             }
