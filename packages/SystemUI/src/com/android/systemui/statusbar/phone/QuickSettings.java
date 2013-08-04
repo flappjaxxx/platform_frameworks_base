@@ -381,30 +381,29 @@ class QuickSettings {
         wifiTile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startSettingsActivity(android.provider.Settings.ACTION_WIFI_SETTINGS);
+                final boolean enable =
+                        (mWifiManager.getWifiState() != WifiManager.WIFI_STATE_ENABLED);
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... args) {
+                        // Disable tethering if enabling Wifi
+                        final int wifiApState = mWifiManager.getWifiApState();
+                        if (enable && ((wifiApState == WifiManager.WIFI_AP_STATE_ENABLING) ||
+                                       (wifiApState == WifiManager.WIFI_AP_STATE_ENABLED))) {
+                            mWifiManager.setWifiApEnabled(null, false);
+                        }
+                        mWifiManager.setWifiEnabled(enable);
+                        return null;
+                    }
+                }.execute();
+                wifiTile.setPressed(false);
             }
         });
         if (LONG_PRESS_TOGGLES) {
             wifiTile.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    final boolean enable =
-                            (mWifiManager.getWifiState() != WifiManager.WIFI_STATE_ENABLED);
-                    new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(Void... args) {
-                            // Disable tethering if enabling Wifi
-                            final int wifiApState = mWifiManager.getWifiApState();
-                            if (enable && ((wifiApState == WifiManager.WIFI_AP_STATE_ENABLING) ||
-                                           (wifiApState == WifiManager.WIFI_AP_STATE_ENABLED))) {
-                                mWifiManager.setWifiApEnabled(null, false);
-                            }
-
-                            mWifiManager.setWifiEnabled(enable);
-                            return null;
-                        }
-                    }.execute();
-                    wifiTile.setPressed(false);
+                    startSettingsActivity(android.provider.Settings.ACTION_WIFI_SETTINGS);
                     return true;
                 }} );
         }
@@ -559,22 +558,22 @@ class QuickSettings {
             bluetoothTile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startSettingsActivity(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
-                }
-            });
-            if (LONG_PRESS_TOGGLES) {
-                bluetoothTile.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View v) {
                         if (mBluetoothAdapter.isEnabled()) {
                             mBluetoothAdapter.disable();
                         } else {
                             mBluetoothAdapter.enable();
                         }
                         bluetoothTile.setPressed(false);
-                        return true;
+                    }
+            });
+            if (LONG_PRESS_TOGGLES) {
+                bluetoothTile.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                    startSettingsActivity(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
+                    return true;
                     }});
-            }
+                }
             mModel.addBluetoothTile(bluetoothTile, new QuickSettingsModel.RefreshCallback() {
                 @Override
                 public void refreshView(QuickSettingsTileView unused, State state) {
